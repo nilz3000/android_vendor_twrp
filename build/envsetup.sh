@@ -3,6 +3,7 @@ cat <<EOF
 Additional Build functions:
 - breakfast:       Setup the build environment, but only list
                    devices we support.
+- cout:            Changes directory to out.
 - mka:             Builds using SCHED_BATCH on all processors.
 - pushboot:        Push a file from your OUT dir to your phone and
                    reboots it, using absolute path.
@@ -44,6 +45,15 @@ function breakfast()
 }
 
 alias bib=breakfast
+
+function cout()
+{
+    if [  "$OUT" ]; then
+        cd $OUT
+    else
+        echo "Couldn't locate out directory.  Try setting OUT."
+    fi
+}
 
 function fixup_common_out_dir() {
     common_out_dir=$(get_build_var OUT_DIR)/target/common
